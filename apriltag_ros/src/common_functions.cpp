@@ -735,10 +735,6 @@ std::vector<TagBundleDescription > TagDetector::parseTagBundles (
 
       // Register the tag member
       bundle_i.addMemberTag(id, size, T_mj);
-      ROS_INFO_STREAM(" " << j << ") id: " << id << ", size: " << size << ", "
-                          << "p = [" << x << "," << y << "," << z << "], "
-                          << "q = [" << qw << "," << qx << "," << qy << ","
-                          << qz << "]");
     }
     descriptions.push_back(bundle_i);
   }
