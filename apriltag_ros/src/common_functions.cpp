@@ -1,3 +1,5 @@
+// clang-format off
+
 /**
  * Copyright (c) 2017, California Institute of Technology.
  * All rights reserved.
@@ -613,6 +615,7 @@ std::map<int, StandaloneTagDescription> TagDetector::parseStandaloneTags (
   // Ensure the type is correct
   ROS_ASSERT(standalone_tags.getType() == XmlRpc::XmlRpcValue::TypeArray);
   // Loop through all tag descriptions
+  ROS_INFO("Loading Standalone Tags");
   for (int32_t i = 0; i < standalone_tags.size(); i++)
   {
 
@@ -650,11 +653,10 @@ std::map<int, StandaloneTagDescription> TagDetector::parseStandaloneTags (
     }
 
     StandaloneTagDescription description(id, size, frame_name);
-    ROS_INFO_STREAM("Loaded tag config: " << id << ", size: " <<
-                    size << ", frame_name: " << frame_name.c_str());
     // Add this tag's description to map of descriptions
     descriptions.insert(std::make_pair(id, description));
   }
+  ROS_INFO("Loaded %li standalone tags", descriptions.size());
 
   return descriptions;
 }
@@ -666,6 +668,7 @@ std::vector<TagBundleDescription > TagDetector::parseTagBundles (
   std::vector<TagBundleDescription > descriptions;
   ROS_ASSERT(tag_bundles.getType() == XmlRpc::XmlRpcValue::TypeArray);
 
+  ROS_INFO("Loading Tag Bundles");
   // Loop through all tag bundle descritions
   for (int32_t i=0; i<tag_bundles.size(); i++)
   {
@@ -687,7 +690,6 @@ std::vector<TagBundleDescription > TagDetector::parseTagBundles (
       bundleName = bundle_name_stream.str();
     }
     TagBundleDescription bundle_i(bundleName);
-    ROS_INFO("Loading tag bundle '%s'",bundle_i.name().c_str());
 
     ROS_ASSERT(bundle_description["layout"].getType() ==
                XmlRpc::XmlRpcValue::TypeArray);
@@ -740,6 +742,7 @@ std::vector<TagBundleDescription > TagDetector::parseTagBundles (
     }
     descriptions.push_back(bundle_i);
   }
+  ROS_INFO("Loaded %li tag bundles", descriptions.size());
   return descriptions;
 }
 
