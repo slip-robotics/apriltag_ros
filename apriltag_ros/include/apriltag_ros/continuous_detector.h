@@ -55,9 +55,9 @@
 namespace apriltag_ros
 {
 
-class ContinuousDetector: public nodelet::Nodelet
+class ContinuousDetector : public nodelet::Nodelet
 {
- public:
+public:
   ContinuousDetector() = default;
   ~ContinuousDetector() = default;
 
@@ -68,11 +68,13 @@ class ContinuousDetector: public nodelet::Nodelet
 
   void refreshTagParameters();
 
- private:
+private:
   std::mutex detection_mutex_;
   std::shared_ptr<TagDetector> tag_detector_;
   bool draw_tag_detections_image_;
   cv_bridge::CvImagePtr cv_image_;
+
+  bool always_on_{false};
 
   std::shared_ptr<image_transport::ImageTransport> it_;
   image_transport::CameraSubscriber camera_image_subscriber_;
